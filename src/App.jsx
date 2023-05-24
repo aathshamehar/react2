@@ -1,19 +1,14 @@
-import React from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Container, Row, Col, Card, Form } from 'react-bootstrap';
 
-class KeralaStateComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      filterValue: '',
-    };
-  }
+const KeralaStateComponent = () => {
+  const [filterValue, setFilterValue] = useState('');
 
-  handleFilterChange = (event) => {
-    this.setState({ filterValue: event.target.value });
+  const handleFilterChange = (event) => {
+    setFilterValue(event.target.value);
   };
 
-  render() {
+
     const cities = [
       {  id: 1, name: 'Kasarkod', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Kasrkod-beach-park-Honnavar.jpg/1200px-Kasrkod-beach-park-Honnavar.jpg' },
       {  id: 2, name: 'Kannur', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Muzhappilangad_Drive-in_Beach_2.jpg/1024px-Muzhappilangad_Drive-in_Beach_2.jpg' },
@@ -30,45 +25,40 @@ class KeralaStateComponent extends React.Component {
       {  id: 13, name: 'Pathanamthitta', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/33kVsubstationperunad.jpeg/1280px-33kVsubstationperunad.jpeg' },
       {  id: 14, name: 'Thiruvananthapuram', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Sanghumugham_Beach_in_TVM.jpg/1024px-Sanghumugham_Beach_in_TVM.jpg' }
     ];
-
-    const filteredCities = cities.filter((city) =>
-      city.name.toLowerCase().includes(this.state.filterValue.toLowerCase()) ||
-      city.id.toString().includes(this.state.filterValue)
+    const filteredCities = cities.filter(
+      (city) =>
+        city.name.toLowerCase().includes(filterValue.toLowerCase()) ||
+        city.id.toString().includes(filterValue)
     );
-
+  
     return (
-      <div>
+      <Container>
         <h1 className="text-center">KERALA STATE</h1>
-
-        <div className="text-center">
-          <input
+  
+        <Form.Group controlId="filterInput">
+          <Form.Control
             type="text"
-            id="filterInput"
             placeholder="Filter by city or ID"
-            className="form-control"
-            value={this.state.filterValue}
-            onChange={this.handleFilterChange}
+            value={filterValue}
+            onChange={handleFilterChange}
           />
-        </div>
-
-        <Container className="text-center">
-          <Row>
-            {filteredCities.map((city, index) => (
-              <Col key={index} sm={12} md={6} lg={4} xl={3}>
-                <Card style={{ width: '18rem' }}>
-                  <Card.Img variant="top" src={city.image} alt={city.name} />
-                  <Card.Body>
-                    <Card.Title>{city.name}</Card.Title>
-                    <Card.Text>ID: {city.id}</Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        </Container>
-      </div>
+        </Form.Group>
+  
+        <Row>
+          {filteredCities.map((city) => (
+            <Col key={city.id} sm={12} md={6} lg={4} xl={3}>
+              <Card>
+                <Card.Img variant="top" src={city.image} alt={city.name} />
+                <Card.Body>
+                  <Card.Title>{city.name}</Card.Title>
+                  <Card.Text>ID: {city.id}</Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </Container>
     );
-  }
-}
-
-export default KeralaStateComponent;
+  };
+  
+  export default KeralaStateComponent;
