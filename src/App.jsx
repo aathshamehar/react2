@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Card, Form } from 'react-bootstrap';
+import './Card.css'
+
+
+
+
 
 const KeralaStateComponent = () => {
   const [filterValue, setFilterValue] = useState('');
@@ -23,7 +28,7 @@ const KeralaStateComponent = () => {
       {  id: 11, name: 'Kollam', image: 'https://upload.wikimedia.org/wikipedia/commons/b/bc/13_Arch_bridge_Kazhuthurutty_Kerala.jpg' },
       {  id: 12, name: 'Kottayam', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Vembanad_Lake_at_Kumarakom.jpg/1280px-Vembanad_Lake_at_Kumarakom.jpg' },
       {  id: 13, name: 'Pathanamthitta', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/33kVsubstationperunad.jpeg/1280px-33kVsubstationperunad.jpeg' },
-      {  id: 14, name: 'Thiruvananthapuram', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Sanghumugham_Beach_in_TVM.jpg/1024px-Sanghumugham_Beach_in_TVM.jpg' }
+      {  id: 14, name: 'Thiruvananthapuram', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Padmanabhapuram_Clock_Tower.jpg/1280px-Padmanabhapuram_Clock_Tower.jpg' }
     ];
     const filteredCities = cities.filter(
       (city) =>
@@ -32,7 +37,8 @@ const KeralaStateComponent = () => {
     );
   
     return (
-      <Container>
+    <div className='bg-img'>
+      <Container >
         <h1 className="text-center">KERALA STATE</h1>
   
         <Form.Group controlId="filterInput">
@@ -46,9 +52,9 @@ const KeralaStateComponent = () => {
   
         <Row>
           {filteredCities.map((city) => (
-            <Col key={city.id} sm={12} md={6} lg={4} xl={3}>
+            <Col key={city.id} sm={12} md={6} lg={4} className="my-3" >
               <Card>
-                <Card.Img variant="top" src={city.image} alt={city.name} />
+                <Card.Img  variant="top" src={city.image} alt={city.name}  style={{height: '13rem'}}/>
                 <Card.Body>
                   <Card.Title>{city.name}</Card.Title>
                   <Card.Text>ID: {city.id}</Card.Text>
@@ -58,6 +64,7 @@ const KeralaStateComponent = () => {
           ))}
         </Row>
       </Container>
+    </div>
     );
   };
   
