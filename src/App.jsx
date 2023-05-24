@@ -30,6 +30,10 @@ const KeralaStateComponent = () => {
       {  id: 13, name: 'Pathanamthitta', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/33kVsubstationperunad.jpeg/1280px-33kVsubstationperunad.jpeg' },
       {  id: 14, name: 'Thiruvananthapuram', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Padmanabhapuram_Clock_Tower.jpg/1280px-Padmanabhapuram_Clock_Tower.jpg' }
     ];
+
+    const cardColors = ['red']; // Array of colors
+
+
     const filteredCities = cities.filter(
       (city) =>
         city.name.toLowerCase().includes(filterValue.toLowerCase()) ||
@@ -39,7 +43,7 @@ const KeralaStateComponent = () => {
     return (
     <div className='bg-img'>
       <Container >
-        <h1 className="text-center">KERALA STATE</h1>
+        <h1 style={{ padding: '40px' }} className="text-center text-danger">KERALA DISTRICTS</h1>
   
         <Form.Group controlId="filterInput">
           <Form.Control
@@ -47,13 +51,17 @@ const KeralaStateComponent = () => {
             placeholder="Filter by city or ID"
             value={filterValue}
             onChange={handleFilterChange}
+            style={{ background: '#f8f9fa', border: '3px solid #ced4da', borderRadius: '4px', padding: '5px' }}
           />
         </Form.Group>
   
         <Row>
           {filteredCities.map((city) => (
             <Col key={city.id} sm={12} md={6} lg={4} className="my-3" >
-              <Card>
+
+ <Card></Card>
+
+               <Card border="dark" style={{ border:'3px solid black' }}>
                 <Card.Img  variant="top" src={city.image} alt={city.name}  style={{height: '13rem'}}/>
                 <Card.Body>
                   <Card.Title>{city.name}</Card.Title>
